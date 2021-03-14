@@ -1,18 +1,15 @@
 <template>
   <div>
-    <menu-bar/>
-    <MainPage/>
+    <MenuBar/>
   </div>
 </template>
 
 <script>
-import MainPage from './components/MainPage.vue'
 import MenuBar from './components/MenuBar.vue'
 
 export default {
   name: 'App',
   components: {
-    MainPage,
     MenuBar
   }
 }
@@ -25,6 +22,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  background-color: #E4E2E2;
 }
 </style>
