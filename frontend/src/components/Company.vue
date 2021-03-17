@@ -1,6 +1,8 @@
 <template lang="">
     <div class="Company">
-        {{"회사 페이지여~~~"}}
+        <div>{{"회사 페이지여~~~"}}</div>
+        <div>{{"회사 페이지여~~~"}}</div><div>{{"회사 페이지여~~~"}}</div><div>{{"회사 페이지여~~~"}}</div><div>{{"회사 페이지여~~~"}}</div><div>{{"회사 페이지여~~~"}}</div>
+        <div>{{"회사 페이지여~~~"}}</div>
     </div>
 </template>
 <script>
@@ -9,6 +11,9 @@ export default {
     
 }
 </script>
-<style lang="">
+<style scoped>
+.Company{
+    background-color: #A26D6D;
+}
     
 </style>
