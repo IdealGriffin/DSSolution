@@ -6,37 +6,46 @@
     </p> -->
     <img id="main-banner" src="../assets/mainbanner.png" alt="main-banner">
     <!-- 반복문으로 처리 -->
-    <h2>{{"News"}}</h2>
-    <div id="news-list">
-      <div id="news">
-        <img id="news-img" src="../assets/apache.png" alt="news-img">
-        <div id="news-data">
-          <h2 id="news-title">
-            뉴스 타이틀
-          </h2>
-          <p id="news-contents">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit vitae delectus deserunt</p>
+    <div id="middle">
+      <div id="left-news">
+        <h2 class="title">{{"News"}}</h2>
+        <div id="middle-data">
+          <img id="news-img" src="../assets/apache.png" alt="news-img">
+          <div id="news-data">
+            <h2 class="title">
+              뉴스 타이틀
+            </h2>
+            <p id="news-contents">News Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit vitae delectus deserunt</p>
+          </div>
         </div>
       </div>
-      <div id="news">
-        <img id="news-img" src="../assets/apache.png" alt="news-img">
-        <div id="news-data">
-          <h2 id="news-title">
-            뉴스 타이틀
-          </h2>
-          <p id="news-contents">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit vitae delectus deserunt</p>
-        </div>
-      </div>
-      <div id="news">
-        <img id="news-img" src="../assets/apache.png" alt="news-img">
-        <div id="news-data">
-          <h2 id="news-title">
-            뉴스 타이틀
-          </h2>
-          <p id="news-contents">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit vitae delectus deserunt</p>
+      <div id="right-notice">
+        <h2 class="title">{{"공지사항"}}</h2>
+        <div id="middle-data">
+          <img id="notice-img" src="../assets/apache.png" alt="notice-img">
+          <div id="notice-data">
+            <h2 class="title">
+              공지사항 타이틀
+            </h2>
+            <p id="notice-contents">Notice Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit vitae delectus deserunt</p>
+          </div>
         </div>
       </div>
     </div>
-
+    <div id="main-business">
+      <router-link to="/product1">
+        <img class="products-img" src="../assets/products1.jpg" alt="product-img"/>
+      </router-link>
+      <router-link to="/product2">
+        <img class="products-img" src="../assets/products2.jpg" alt="product-img"/>
+      </router-link>
+      <router-link to="/product3">
+        <img class="products-img" src="../assets/products3.jpg" alt="product-img"/>
+      </router-link>
+      <router-link to="/product4">
+        <img class="products-img" src="../assets/products4.jpg" alt="product-img"/>
+      </router-link>
+    </div>
     <div id="cooporate">
       <h2>Cooporate</h2>
       <div id="cooporate-list">
@@ -66,37 +75,57 @@ export default {
   width: 100%;
   height: 150%;
 }
-#news-img{
-  width: 100%;
-  height: 100%;
+
+#news-img, #notice-img{
+  width: 25%;
+  height: 25%;
 }
-#news-list{
+
+#middle{
+  display: flex;
+  padding-bottom: 2%;
+}
+#middle-data{
+  display: flex;
+}
+#middle-list{
   display: flex;
   width: 100%;
   height: 140px;
 }
-#news{
-  display: flex;
+#left-news, #right-notice{
+  padding-left: 3%;
+  padding-right: 3%;
+}
+#news-data, #notice-data{
   padding-left: 5%;
   padding-right: 5%;
 }
-#news-title{
-  max-height: 50%;
+.title{
+  text-align: left;
 }
-#news-data{
-  padding-left: 5%;
-  padding-right: 5%
-}
-#news-contents{
+#news-contents, #notice-contents{
   width: 100%;
   height: 50%;
-  padding-left: 5%;
   padding-right: 5%;
   text-align: left;
   overflow: hidden;
 }
+
+#main-business{
+  display: flex;
+  justify-content: space-between;
+}
+
+.products-img{
+  height: 600px;
+  width: 400px;
+  padding: 20px;
+}
+
 #cooporate{
   padding-top: 5%;
+  padding-bottom: 5%;
   height: 20%;
 }
 #cooporate-list{

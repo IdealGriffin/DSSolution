@@ -1,7 +1,11 @@
 import { createWebHistory, createRouter } from "vue-router";
 import MainPage from "../components/MainPage.vue";
 import Company from "../components/Company.vue";
+
 import Product from "../components/Product.vue";
+import Product2 from "../components/Product2.vue";
+import Product3 from "../components/Product3.vue";
+import Product4 from "../components/Product4.vue";
 
 import Notice from "../components/Notice.vue";
 
@@ -23,9 +27,24 @@ const routes = [
     component: Company,
   },
   {
-    path: "/product",
+    path: "/product1",
     name: "Product",
     component: Product,
+  },
+  {
+    path: "/product2",
+    name: "Product2",
+    component: Product2,
+  },
+  {
+    path: "/product3",
+    name: "Product3",
+    component: Product3,
+  },
+  {
+    path: "/product4",
+    name: "Product4",
+    component: Product4,
   },
   {
     path: "/support",

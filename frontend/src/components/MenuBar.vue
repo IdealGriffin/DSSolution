@@ -21,9 +21,10 @@
         </div>
     </div>
     <div id="sub-menu" v-show="toShowProductList">
-        <router-link id="menu-router" to="/product"> 상품1 </router-link>
-        <router-link id="menu-router" to="/product"> 상품2 </router-link>
-        <router-link id="menu-router" to="/product"> 상품3 </router-link>
+        <router-link id="menu-router" to="/product1"> 상품1 </router-link>
+        <router-link id="menu-router" to="/product2"> 상품2 </router-link>
+        <router-link id="menu-router" to="/product3"> 상품3 </router-link>
+        <router-link id="menu-router" to="/product4"> 상품4 </router-link>
     </div>
     <div id="sub-menu" v-show="toShowSupportList">
         <router-link id="menu-router" to="/faq"> 자주묻는질문 </router-link>
