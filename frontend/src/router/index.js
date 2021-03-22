@@ -8,6 +8,9 @@ import Product3 from "../components/Product3.vue";
 import Product4 from "../components/Product4.vue";
 
 import Notice from "../components/Notice.vue";
+import News from "../components/News.vue";
+
+import PageDetail from "../components/PageDetail.vue";
 
 import Support from "../components/Support.vue";
 import FaQ from "../components/FaQ.vue";
@@ -52,6 +55,16 @@ const routes = [
     component: Support,
   },
   {
+    path: "/support/news",
+    name: "News",
+    component: News,
+  },
+  {
+    path: "/support/news/:id",
+    name: "NewsDetail",
+    component: PageDetail,
+  },
+  {
     path: "/faq",
     name: "FaQ",
     component: FaQ,
@@ -65,6 +78,11 @@ const routes = [
     path: "/notice",
     name: "Notice",
     component: Notice,
+  },
+  {
+    path: "/notice/:id",
+    name: "NoticeDetail",
+    component: PageDetail
   },
   {
     path: "/:catchAll(.*)",

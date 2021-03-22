@@ -1,12 +1,12 @@
 <template lang="">
-    <div class="Notice">
+    <div class="News">
         <div class="headline">
-            <h2 class="headline-title">공지사항</h2>
+            <h2 class="headline-title">뉴스</h2>
         </div>
         <div>
             <div class="board-list">
-                <div v-for="(item, id) in boardList" :key="id">
-                    <router-link id=board-router :to="`/notice/${item.id}`">
+                <div v-for="(item, id) in newsList" :key="id">
+                    <router-link id=board-router :to="`/support/news/${item.id}`">
                         <span class="board-id">{{item.id}}</span>
                         <span class="board-title">{{item.title}}</span>
                         <span class="board-date">{{item.date}}</span>
@@ -21,23 +21,23 @@
 </template>
 <script>
 export default {
-    name: 'Notice',
+    name: 'News',
     components: {
 
     },
     data(){
         // 추후에는 axios이용해서 클릭했을 경우 각각의 데이터를 불러오도록 만들 예정
         return {
-            boardList:[
+            newsList:[
                 {
                     id: 1,
-                    title: "타이틀1",
+                    title: "뉴스타이틀1",
                     contents: "컨텐츠!@!@",
                     date: "2021.03.07",
                 },
                 {
                     id: 2,
-                    title: "타이틀2",
+                    title: "뉴스타이틀2",
                     contents: "컨텐츠!@!@",
                     date: "2021.03.08",
                 },
