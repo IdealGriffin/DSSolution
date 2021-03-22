@@ -27,6 +27,14 @@
                 <a id="table-like">2</a>
             </ui>
         </div>
+        <div id="table">
+            <ui id="choose-item" name="1" style="text-decoration:underline;">1</ui>
+            <ui id="choose-item" name="2">2</ui>
+            <ui id="choose-item" name="3">3</ui>
+            <ui id="choose-item" name="4">4</ui>
+            <ui id="choose-item" name="5">5</ui>
+            <ui id="choose-item" name="6">6</ui>
+        </div>
     </div>
 </template>
 <script>
