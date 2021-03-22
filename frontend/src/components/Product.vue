@@ -1,6 +1,6 @@
 <template lang="">
     <div class="Product">
-        {{"제품 페이지여~~~"}}
+        {{"제품1 페이지여~~~"}}
     </div>
 </template>
 <script>

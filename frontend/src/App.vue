@@ -1,16 +1,19 @@
 <template>
   <div>
     <MenuBar/>
+    <BottomBanner/>
   </div>
 </template>
 
 <script>
 import MenuBar from './components/MenuBar.vue'
+import BottomBanner from './components/BottomBanner.vue'
 
 export default {
   name: 'App',
   components: {
-    MenuBar
+    MenuBar,
+    BottomBanner
   }
 }
 </script>
