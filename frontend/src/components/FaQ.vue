@@ -19,8 +19,8 @@
         </ui>
         <br>
         <form id="table">
-            <input id="table-answer" type="button" value=" 검색 ">
-            <input id="table-answer" type="text" placeholder="Search"> 
+            <input id="table-answer" type="button" style="width:80px" value=" 검색 ">
+            <input id="table-answer" type="text" style="width:100px" placeholder="Search"> 
         </form>
         <br>
         <div id="table">
