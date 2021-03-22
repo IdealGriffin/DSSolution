@@ -46,18 +46,18 @@ export default {
         font-size: 70px;
     }
     #table{
-        width:70%;
+        display:inline-block;
+        width:1200px;
         height: 30px;
         border-top:2px solid;
-        margin-left:15%;
         padding: 15px 15px 15px 15px;
     }
     #table-kind{
-        width:15%;
+        width:120px;
         font-size:20px;
         float:left;
     }#table-question{
-        width:60%;
+        width:500px;
         font-size:20px;
         float:left;
         text-align:left;
@@ -66,7 +66,7 @@ export default {
         font-size:20px;
     }#table-like{
         float:right;
-        width:5%;
+        width:60px;
         font-size:20px;
     }
 </style>
