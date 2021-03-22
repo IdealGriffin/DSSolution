@@ -44,6 +44,15 @@
                 <a id="table-answer"> + </a>
             </ui>
         </div>
+
+        <div id="table">
+            <ui id="choose-item" name="1" style="text-decoration:underline;">1</ui>
+            <ui id="choose-item" name="2">2</ui>
+            <ui id="choose-item" name="3">3</ui>
+            <ui id="choose-item" name="4">4</ui>
+            <ui id="choose-item" name="5">5</ui>
+            <ui id="choose-item" name="6">6</ui>
+        </div>
     </div>
 </template>
 <script>
@@ -78,22 +87,23 @@ export default {
         font-size:20px;
     }
     #table{
-        width:70%;
-        height: 30px;
+        display:inline-block;
         border-top:2px solid;
-        margin-left:15%;
-        padding: 15px 15px 15px 15px;
+        height: 30px;
+        width: 1200px;
+        padding: 15px 15px;
     }
     #table-kind{
-        width:15%;
+        width:120px;
         font-size:20px;
         float:left;
     }#table-question{
-        width:60%;
+        width:500px;
         font-size:20px;
         float:left;
         text-align:left;
     }#table-answer{
+        width:50px;
         float:right;
         font-size:20px;
     }
