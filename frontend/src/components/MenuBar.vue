@@ -31,7 +31,6 @@
         <router-link id="menu-router" to="/qna"> 1대1 문의 </router-link>
         <router-link id="menu-router" to="/support"> 고객지원 </router-link>
     </div>
-    <router-view/>
 </template>
 <script>
 import Login from './Login'
