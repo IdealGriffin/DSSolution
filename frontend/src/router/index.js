@@ -1,21 +1,16 @@
 import { createWebHistory, createRouter } from "vue-router";
 import MainPage from "../components/MainPage.vue";
 import Company from "../components/Company.vue";
-
 import Product from "../components/Product.vue";
 import Product2 from "../components/Product2.vue";
 import Product3 from "../components/Product3.vue";
 import Product4 from "../components/Product4.vue";
-
 import Notice from "../components/Notice.vue";
 import News from "../components/News.vue";
-
 import PageDetail from "../components/PageDetail.vue";
-
 import Support from "../components/Support.vue";
 import FaQ from "../components/FaQ.vue";
 import QnA from "../components/QnA.vue";
-
 import NotFound from "../components/NotFound.vue";
 
 const routes = [
@@ -86,6 +81,7 @@ const routes = [
   },
   {
     path: "/:catchAll(.*)",
+    name: "NotFound",
     component: NotFound,
   }
 ];

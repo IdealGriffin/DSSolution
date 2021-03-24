@@ -1,7 +1,8 @@
 <template>
   <div>
-    <MenuBar/>
-    <BottomBanner/>
+    <MenuBar v-if="$route.name != 'NotFound'"/>
+    <router-view/>
+    <BottomBanner v-if="$route.name != 'NotFound'"/>
   </div>
 </template>
 
