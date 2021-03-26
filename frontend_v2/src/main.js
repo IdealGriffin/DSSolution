@@ -1,17 +1,19 @@
 import Vue from 'vue'
 import App from './App.vue'
 
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+Vue.config.productionTip = false
 
+///bootstrap 설정
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
 
+//router설정
 import VueRouter from 'vue-router'
 import MainPage from "./components/MainPage.vue";
 import Company from "./components/Company.vue";
@@ -98,9 +100,8 @@ const routes = [
     component: NotFound,
   }
 ];
-Vue.config.productionTip = false
-
 Vue.use(VueRouter)
+
 new Vue({
   router: new VueRouter({
     routes
