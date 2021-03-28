@@ -1,60 +1,67 @@
 <template lang="">
-    <div>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Fifth navbar example">
-            <div class="container-fluid">
-            <a class="navbar-brand" href="#">Expand at lg</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarsExample05">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdown05">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </li>
-                </ul>
-                <form>
-                <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-                </form>
-            </div>
-            </div>
-        </nav>
-        <div class="menu">
-            <router-link id="logo-img" to="/">
+    <div id="menu">
+        <b-navbar toggleable="sm">
+            <b-navbar-brand href="/">
                 <img 
                 id="logo" 
                 alt="logo" 
                 src="../assets/cocacolaLogo.jpeg"
                 >
-            </router-link>
-            <div class="menu-list">
-                <router-link id="menu-router" to="/company" @click="initSubMenu">회사소개</router-link>
-                <nav id="menu-router" @click="showProduct">
-                제품소개
-                </nav>
-                <nav id="menu-router" @click="showSupport">
-                고객지원
-                </nav>
-                <router-link id="menu-router" to="/notice" @click="initSubMenu">공지사항</router-link>
-                <a id="menu-router" :href="mallLink.url" :target="mallLink.target">쇼핑몰</a>
-                <Login id="menu-router"/>
-            </div>
-        </div>
-        <div id="sub-menu" v-show="toShowProductList">
+            </b-navbar-brand>
+            <b-navbar-toggle target="nav-text-collapse"></b-navbar-toggle>
+            <b-collapse id="nav-text-collapse" is-nav>
+                <b-navbar-nav>
+                    <b-nav-item href="#/company">
+                        <a id="menu-router">회사소개</a>
+                    </b-nav-item>
+                    <b-nav-item-dropdown toggle-class="text-decoration-none" no-caret>
+                        <template #button-content>
+                            <span id="menu-router"> 제품소개 </span>
+                        </template>
+                        <b-dropdown-item href="#/product1">
+                            <span id="sub-item">상품1</span>
+                        </b-dropdown-item>
+                        <b-dropdown-item href="#/product2">
+                            <span id="sub-item">상품2</span>
+                        </b-dropdown-item>
+                        <b-dropdown-item href="#/product3">
+                            <span id="sub-item">상품3</span>
+                        </b-dropdown-item>
+                    </b-nav-item-dropdown>
+                    <b-nav-item-dropdown toggle-class="text-decoration-none" no-caret>
+                        <template #button-content>
+                            <span id="menu-router"> 고객지원 </span>
+                        </template>
+                        <b-dropdown-item href="#/faq">
+                            <span id="sub-item">자주 묻는 질문</span>
+                        </b-dropdown-item>
+                        <b-dropdown-item href="#/qna">
+                            <span id="sub-item">1대1 문의</span>
+                        </b-dropdown-item>
+                        <b-dropdown-item href="#/support">
+                            <span id="sub-item">고객지원</span>
+                        </b-dropdown-item>
+                        <b-dropdown-item href="#/support/news">
+                            <span id="sub-item">뉴스</span>
+                        </b-dropdown-item>
+                    </b-nav-item-dropdown>
+                    <b-nav-item href="#/notice">
+                        <a id="menu-router">공지사항</a>
+                    </b-nav-item>
+                    <b-nav-item :href="mallLink.url" :target="mallLink.target">
+                        <a id="menu-router">
+                        쇼핑몰
+                        </a>
+                    </b-nav-item>
+                    <b-nav-item href="#/login">
+                        <a id="menu-router">
+                        Login
+                        </a>
+                    </b-nav-item>
+                </b-navbar-nav>
+            </b-collapse>
+        </b-navbar>
+        <!-- <div id="sub-menu" v-show="toShowProductList">
             <router-link id="menu-router" to="/product1"> 상품1 </router-link>
             <router-link id="menu-router" to="/product2"> 상품2 </router-link>
             <router-link id="menu-router" to="/product3"> 상품3 </router-link>
@@ -64,15 +71,13 @@
             <router-link id="menu-router" to="/faq"> 자주묻는질문 </router-link>
             <router-link id="menu-router" to="/qna"> 1대1 문의 </router-link>
             <router-link id="menu-router" to="/support"> 고객지원 </router-link>
-        </div>
+        </div> -->
     </div>
 </template>
 <script>
-import Login from './Login'
 export default {
     name: 'MenuBar',
     components: {
-        Login
     },
     data() {
         return {
@@ -105,29 +110,20 @@ export default {
 }
 </script>
 <style scoped>
-.menu{
-    display: flex;
-    width: 100%;
-    height: 20%;
+#menu{
+    background-color: white;
+    max-width: 1024px;
+    margin: 0 auto;
 }
-#logo-img{
-    width: 20%;
+#nav-text-collapse{
+    align-items: center;
+}
+.navbar-nav{
+    width: 100%;
+    justify-content: space-between;
 }
 #logo{
-    width: 100%;
-    height: 100%;
-}
-.menu-list{
-    display: flex;
-    width: 80%;
-    align-items: center;
-    align-content: center;
-    justify-content: space-between;
-    padding-left: 5%;
-    padding-right: 5%;
-}
-.menu{
-    background-color: white;
+    width: 300px;
 }
 #sub-menu{
     display: flex;
@@ -139,6 +135,9 @@ export default {
 #menu-router{
     color: black;
     text-decoration: none;
-    font-size: 120%;
+    font-size: 24px;
+}
+#sub-item{
+    font-size: 20px;
 }
 </style>
