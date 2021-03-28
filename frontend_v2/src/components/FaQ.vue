@@ -39,6 +39,15 @@
                 </b-card>
             </div>
         </div>
+        <div style="display:flex">
+            <b-pagination
+                v-model="currentPage"
+                :total-rows="rows"
+                :per-page="perPage"
+                aria-controls="my-table"
+                style="margin: 0 auto;"
+            ></b-pagination>
+        </div>
     </div>
 </template>
 <script>
