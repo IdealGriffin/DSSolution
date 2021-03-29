@@ -66,7 +66,8 @@ export default {
 
 <style scoped>
 .Company{
-    background-color: #A26D6D;
+    text-align: center;
+    /*background-color: #A26D6D;*/
     width: 100%;
 }
 #detail{
@@ -77,13 +78,17 @@ export default {
     width: 600px;
 }
 .history{
-    width:100%;
+    display: inline-block;
+    width:1040px;
 }
 #introduce{
-    width:100%;
+    display: table;
+    width:1040px;
     text-align: center;
     background-image: url(../assets/로봇팔.png);
     background-size:100%;
+    margin: 0 auto;
+    padding: 20px;
 }
 #photo{
     float:left;
@@ -103,35 +108,37 @@ export default {
     height: 600px;
 }
 #certificate{
-    padding: 20px;
+    margin: 20px;
 }
 #certificate-list{
-  display: flex;
+  display: inline-block;
   justify-content: space-between;
-  max-height: inherit;
-  max-width: 100%;
-  padding-left: 5%;
-  padding-right: 5%;
+  max-width: 1040px;
 }
 #certificate-img{
-  padding-left: 1%;
-  padding-right: 1%;
-  max-width: 10%;
-  height: auto;
+  padding-left: 4px;
+  padding-right: 4px;
+  max-width: 200px;
+  height: 300px;
 }
 #industry-list{
-  display: flex;
+  display: table;
   justify-content: space-between;
   max-height: inherit;
-  max-width: 100%;
-  padding-left: 5%;
-  padding-right: 5%;
+  max-width: 1040px;
+  padding-bottom:20px;
+  margin: 0 auto;
 }
 #industry-img{
-  padding-left: 1%;
-  padding-right: 1%;
   border-radius: 50%;
-  max-width: 10%;
+  max-width: 200px;
   height: auto;
+  padding: 4px;
+}
+
+@media ( max-width: 1040px ) {
+    #introduce{
+        width:100%;
+    }
 }
 </style>
