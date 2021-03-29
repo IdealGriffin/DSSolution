@@ -1,6 +1,6 @@
 <template lang="">
     <div id="menu">
-        <b-navbar toggleable="sm">
+        <b-navbar toggleable="lg">
             <b-navbar-brand href="/">
                 <img 
                 id="logo" 
@@ -18,13 +18,13 @@
                         <template #button-content>
                             <span id="menu-router"> 제품소개 </span>
                         </template>
-                        <b-dropdown-item href="#/product1">
+                        <b-dropdown-item href="#/product/1">
                             <span id="sub-item">상품1</span>
                         </b-dropdown-item>
-                        <b-dropdown-item href="#/product2">
+                        <b-dropdown-item href="#/product/2">
                             <span id="sub-item">상품2</span>
                         </b-dropdown-item>
-                        <b-dropdown-item href="#/product3">
+                        <b-dropdown-item href="#/product/3">
                             <span id="sub-item">상품3</span>
                         </b-dropdown-item>
                     </b-nav-item-dropdown>
