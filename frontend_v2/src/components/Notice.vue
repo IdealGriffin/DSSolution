@@ -61,6 +61,10 @@ export default {
 <style scoped>
 .headline-title{
     font-weight: 700;
+    max-width: 1080px;
+    margin: 0 auto;
+    text-align: center;
+    padding-bottom: 20px;
 }
 
 .board-list{

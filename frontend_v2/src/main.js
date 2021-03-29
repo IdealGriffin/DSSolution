@@ -28,6 +28,7 @@ import Support from "./components/Support.vue";
 import FaQ from "./components/FaQ.vue";
 import QnA from "./components/QnA.vue";
 import NotFound from "./components/NotFound.vue";
+import Login from "./components/Login.vue"
 
 const routes = [
   {
@@ -99,6 +100,11 @@ const routes = [
     path: "/notice/:id",
     name: "NoticeDetail",
     component: PageDetail
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: Login
   },
   {
     path: "/:catchAll(.*)",
