@@ -1,80 +1,114 @@
 <template lang="">
     <div class="QnA">
-        <a id="title">
+        <div id="title">
             1 대 1 문의
-        </a>
-        <br>
-        <form id="table">
-            <input id="table-answer" type="button" value=" 1대1 문의하기 ">
-        </form>
-        <br>
-
-        <div id="table">
-            <ui id="table-head">
-                <div id="table-kind"><b>문의종류</b></div>
-                <div id="table-question" style="text-align:center"><b>문의제목</b></div>
-                <a id="table-like"><b>조회수</b></a>
-                <a id="table-like"><b>좋아요</b></a>
-                <a id="table-like"><b>답변</b></a>
-            </ui>
+        </div>
+        <div id="ask">
+            <input class="ask-button" type="button" value=" 1대1 문의하기 ">
         </div>
         <div id="table">
-            <ui id="table-head">
-                <div id="table-kind">교환 및 환불</div>
-                <a sytle="font-color:black" href="./qna/answer"><div id="table-question">제가 입금을 햇는데 제품이 마음에 안들어서요.</div></a>
-                <a id="table-like">3</a>
-                <a id="table-like">2</a>
-                <a id="table-like">2</a>
-            </ui>
+            <div v-for="(item, id) in boardList" :key="id">
+                <router-link class=table-router :to="`/notice/${item.id}`">
+                    <span class="table-id">{{item.id}}</span>
+                    <span class="table-title">{{item.title}}</span>
+                    <span class="table-date">{{item.date}}</span>
+                </router-link>
+            </div>
         </div>
-        <div id="table">
-            <ui id="choose-item" name="1" style="text-decoration:underline;">1</ui>
-            <ui id="choose-item" name="2">2</ui>
-            <ui id="choose-item" name="3">3</ui>
-            <ui id="choose-item" name="4">4</ui>
-            <ui id="choose-item" name="5">5</ui>
-            <ui id="choose-item" name="6">6</ui>
+        <div style="display:flex">
+            <b-pagination
+                v-model="currentPage"
+                :total-rows="rows"
+                :per-page="perPage"
+                aria-controls="my-table"
+                style="margin: 0 auto;"
+            ></b-pagination>
         </div>
     </div>
 </template>
 <script>
 export default {
     name: 'QnA',
-    
+        data(){
+        // 추후에는 axios이용해서 클릭했을 경우 각각의 데이터를 불러오도록 만들 예정
+        return {
+            boardList:[
+                {
+                    id: 1,
+                    title: "타이틀1",
+                    contents: "컨텐츠!@!@",
+                    date: "2021.03.07",
+                },
+                {
+                    id: 2,
+                    title: "타이틀2",
+                    contents: "컨텐츠!@!@",
+                    date: "2021.03.08",
+                },
+                {
+                    id: 3,
+                    title: "타이틀3",
+                    contents: "컨텐츠!@!@",
+                    date: "2021.03.09",
+                },
+                {
+                    id: 4,
+                    title: "타이틀4",
+                    contents: "컨텐츠!@!@",
+                    date: "2021.03.10",
+                },
+            ]
+        }
+    }
 }
 </script>
 <style scoped>
     .QnA{
-        background-color: #A26D6D;
+        /*background-color: #A26D6D;*/
         align-items:center;
         width: 100%;
         height: 1000px;
     }
     #title{
-        font-size: 70px;
+        display: table;
+        background-color: #A26D6D;
+        width: 1040px;
+        text-align: left;
+        font-size:50px;
+        padding:20px;
+        margin: 0 auto;
+    }
+    #ask{
+        width: 1040px;
+        height: 50px;
+        margin:0 auto;
+    }
+    .ask-button{
+        margin: 2px auto;
+        padding: 2px;
+        float:right;
     }
     #table{
-        display:inline-block;
-        width:1200px;
-        height: 30px;
-        border-top:2px solid;
-        padding: 15px 15px 15px 15px;
+        display: table;
+        width: 1040px;
+        border-top: 1px solid black;
+        table-layout: fixed;
+        margin: 0 auto;
     }
-    #table-kind{
-        width:120px;
-        font-size:20px;
-        float:left;
-    }#table-question{
-        width:500px;
-        font-size:20px;
-        float:left;
-        text-align:left;
-    }#table-answer{
-        float:right;
-        font-size:20px;
-    }#table-like{
-        float:right;
-        width:60px;
-        font-size:20px;
+    .table-router{
+        display: table-row;
+        height: 60px;
+    }
+    .table-id, .table-title, .table-date{
+        vertical-align: middle;
+        display: table-cell;
+        padding-right: 30px;
+        padding-left: 30px;
+        box-sizing: border-box;
+    }
+    a{
+    color: black;
+    text-decoration: none;
+    font-size: 120%;
     }
 </style>
