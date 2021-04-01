@@ -8,7 +8,7 @@ view_names=['Company_Introduce','Company_History','Company_Certificate']
 
 for name in view_names: #단순 참조용.
     exec(
-    "class "+name+"View(generics.CreateAPIView):\n"+
+    "class "+name+"View(generics.ListAPIView):\n"+
     "   queryset="+name+".objects.all()\n"+
     "   serializer_class="+name+"Serializer\n"
     )
