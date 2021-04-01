@@ -25,7 +25,7 @@ SECRET_KEY = 'btzvas_k6(hsui#tt+$6snid6#9%fe=yh3luysj@2d#bh-j$r#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['14.52.118.169']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition

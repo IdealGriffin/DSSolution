@@ -18,6 +18,7 @@
             <b-tab title="기타"></b-tab>
         </b-tabs>
         <form id="search">
+            <input type="button"  class="search-text" value=" 검색 ">
             <input type="text" class="search-text">
         </form>
         <div id="table" role="tablist">

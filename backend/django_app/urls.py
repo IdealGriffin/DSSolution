@@ -1,10 +1,14 @@
-from django.urls import path, include
+from django.urls import re_path, path, include
 from rest_framework.routers import DefaultRouter
 from . import views
 
-# router 를 새로 만든다.
+#Create your views here.
+admin_names=['Company_Introduce','Company_History','Company_Certificate','FaQ','QnA_Answer','QnA_Question']
+
 router = DefaultRouter()
-router.register('App', views.AppViewSet)
-urlpatterns = [ 
-    path('', include(router.urls)) 
+for name in admin_names: exec("router.register('"+name+"',views."+name+"Admin)\n")
+
+urlpatterns=[
+    path('apiadmin/', include(router.urls)),
+    path('company/introduce/',views.Company_IntroduceView.as_view()),
 ]

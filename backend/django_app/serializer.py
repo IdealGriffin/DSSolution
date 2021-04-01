@@ -1,7 +1,12 @@
 from rest_framework import serializers
-from .models import App
+from .models import *
 
-class AppSerializer(serializers.ModelSerializer):
-	class Meta:
-		model = App
-		fields = ['name', 'description'] #'__all__'
+admin_names=['Company_Introduce','Company_History','Company_Certificate','FaQ','QnA_Answer','QnA_Question']
+# Create your models here.
+for name in admin_names:
+	exec(
+	"class "+name+"Serializer(serializers.ModelSerializer):\n"+
+	"	class Meta:\n"+
+	"		model = "+name+"\n"+
+	"		fields = '__all__'"
+	)
