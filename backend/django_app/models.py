@@ -42,3 +42,38 @@ class QnA_Answer(models.Model):
 	question_number = models.IntegerField()
 
 
+class Banner(models.Model):
+	location = models.CharField(max_length=50)
+	name = models.CharField(max_length=50)
+
+class News(models.Model):
+	title = models.CharField(max_length=50)
+	contents = models.TextField()
+	image_url = models.CharField(max_length=50)
+	date = models.DateTimeField(auto_now=False, auto_now_add=False)
+
+class Notice(models.Model):
+	title = models.CharField(max_length=50)
+	contents = models.TextField()
+	date = models.DateTimeField(auto_now=False, auto_now_add=False)
+
+class Cooporate(models.Model):
+	name = models.CharField(max_length=50)
+	image_url = models.CharField(max_length=50)
+
+
+class Product(models.Model):
+	kind = models.IntegerField()
+	name = models.CharField(max_length=50)
+	introduce = models.TextField()
+	image_url = models.CharField(max_length=50)
+
+class Product_summary(models.Model):
+	name = models.CharField(max_length=50)
+	kind = models.ForeignKey("Product", on_delete=models.CASCADE)
+	price = models.IntegerField()
+	summary = models.TextField()
+
+class Product_detail(models.Model):
+	name = models.ForeignKey("Product_summary", on_delete=models.CASCADE, unique=True)
+	detail = models.TextField()
