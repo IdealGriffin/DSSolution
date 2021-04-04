@@ -1,7 +1,5 @@
 from django.db import models
 
-company_names=['Introduce','History','Certificate']
-
 # Create your models here.
 class Company_Introduce(models.Model): 
 	image_url = models.CharField(max_length=50)
@@ -17,6 +15,7 @@ class Company_Main_Business(models.Model):
 	name = models.CharField(max_length=50)
 	contents = models.TextField()
 	image_url = models.CharField(max_length=50)
+	models.ImageField()
 
 class Company_Certificate(models.Model):
 	name = models.CharField(max_length=50)
@@ -39,7 +38,7 @@ class QnA_Answer(models.Model):
 	contents = models.TextField()
 	writer = models.CharField(max_length=50)
 	date = models.DateField()
-	question_number = models.IntegerField()
+	question_number = models.ForeignKey("QnA_Question", on_delete=models.CASCADE)
 
 
 class Banner(models.Model):

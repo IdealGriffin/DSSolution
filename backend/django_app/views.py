@@ -3,7 +3,8 @@ from rest_framework import viewsets,generics
 from .models import *
 from .serializer import *
 
-admin_names=['Company_Introduce','Company_History','Company_Certificate','FaQ','QnA_Answer','QnA_Question']
+#Create your views here.
+admin_names=['Company_Introduce','Company_History','Company_Certificate','FaQ','QnA_Answer','QnA_Question','Banner','News','Product','Product_summary','Product_detail']
 view_names=['Company_Introduce','Company_History','Company_Certificate']
 
 for name in view_names: #단순 참조용.
