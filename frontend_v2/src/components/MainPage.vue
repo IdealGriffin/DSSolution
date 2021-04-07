@@ -1,33 +1,62 @@
 <template>
   <div class="MainPage">
     <!-- <h1>{{ "Welcome to Your DS Solutions!" }}</h1> -->
-    <!-- <p>
-      {{"여기는 메인 페이지에요!"}}
-    </p> -->
-    <img id="main-banner" src="../assets/mainbanner.png" alt="main-banner">
+    <!-- 배너 자리 -->
+    <!-- <img id="main-banner" src="../assets/mainbanner.png" alt="main-banner"> -->
+    <b-carousel
+      id="main-banner"
+      v-model="slide"
+      :interval="4000"
+      controls
+      indicators
+      background="#ababab"
+      img-width="100"
+      img-height="480"
+      style="text-shadow: 1px 1px 2px #333;"
+      @sliding-start="onSlideStart"
+      @sliding-end="onSlideEnd"
+    >
+
+      <b-carousel-slide v-for="(b, id) in banner" :key="id" :img-src="b.location">
+      </b-carousel-slide>
+
+      <!-- <b-carousel-slide v-for="(b, id) in banner" :key="id">
+        <template #img>
+          <img
+            class="d-block img-fluid"
+            width="1024"
+            height="480"
+            :src="b.location"
+            alt="image slot"
+          >
+        </template>
+      </b-carousel-slide> -->
+
+    </b-carousel>
+
     <!-- 반복문으로 처리 -->
     <div id="middle">
       <div id="left-news">
         <h2 class="title">{{"News"}}</h2>
         <div id="middle-data">
-          <img id="news-img" src="../assets/apache.png" alt="news-img">
+          <img id="news-img" :src="this.latestNews.image_url" alt="news-img">
           <div id="news-data">
             <h2 class="title">
-              뉴스 타이틀
+              {{this.latestNews.title}}
             </h2>
-            <p id="news-contents">News Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit vitae delectus deserunt</p>
+            <p id="news-contents">{{this.latestNews.contents}}</p>
           </div>
         </div>
       </div>
       <div id="right-notice">
         <h2 class="title">{{"공지사항"}}</h2>
         <div id="middle-data">
-          <img id="notice-img" src="../assets/apache.png" alt="notice-img">
+          <img id="notice-img" src="https://www.flaticon.com/svg/vstatic/svg/3892/3892387.svg?token=exp=1617807030~hmac=7130147e145469bcca4319fb37920ab9" alt="notice-img">
           <div id="notice-data">
             <h2 class="title">
-              공지사항 타이틀
+              {{this.latestNotice.title}}
             </h2>
-            <p id="notice-contents">Notice Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit vitae delectus deserunt</p>
+            <p id="notice-contents">{{this.latestNotice.contents}}</p>
           </div>
         </div>
       </div>
@@ -49,11 +78,7 @@
     <div id="cooporate">
       <h2>Cooporate</h2>
       <div id="cooporate-list">
-        <img id="cooporate-img" src="../assets/apache.png" alt="news-img">
-        <img id="cooporate-img" src="../assets/apache.png" alt="news-img">
-        <img id="cooporate-img" src="../assets/apache.png" alt="news-img">
-        <img id="cooporate-img" src="../assets/apache.png" alt="news-img">
-        <img id="cooporate-img" src="../assets/apache.png" alt="news-img">
+        <img v-for="(i, id) in cooporate" :key="id" id="cooporate-img" :src="i.image_url" :alt="i.name">
       </div>
 
     </div>
@@ -64,17 +89,119 @@
 <script>
 export default {
   name: 'MainPage',
+  data() {
+    return {
+      banner : [
+        {
+          name : "기본 배너",
+          location : "https://picsum.photos/1024/480/?image=52",
+        },
+        {
+          name : "기본 배너2",
+          location : "https://picsum.photos/1024/480/?image=52",
+        },
+        {
+          name : "기본 배너3",
+          location : "https://picsum.photos/1024/480/?image=52",
+        },
+        {
+          name : "기본 배너4",
+          location : "https://picsum.photos/1024/480/?image=52",
+        },
+      ],
+      latestNews : {
+        title : "최근 뉴스 제목 기본 값",
+        contents : "최근 뉴스 컨텐츠 기본 값",
+        image_url : "https://www.flaticon.com/svg/vstatic/svg/3892/3892387.svg?token=exp=1617807030~hmac=7130147e145469bcca4319fb37920ab9",
+      },
+      latestNotice : {
+        title : "최근 공지 제목 기본 값",
+        contents : "최근 공지 컨텐츠 기본 값"
+      },
+      cooporate : [
+        {
+          name : "기본 이미지",
+          image_url : "https://www.flaticon.com/svg/vstatic/svg/1786/1786971.svg?token=exp=1617804450~hmac=ffc3c263fae13afe7bf02256e0f2655a",
+        },
+        {
+          name : "기본 이미지2",
+          image_url : "https://www.flaticon.com/svg/vstatic/svg/1786/1786971.svg?token=exp=1617804450~hmac=ffc3c263fae13afe7bf02256e0f2655a",
+        },
+        {
+          name : "기본 이미지3",
+          image_url : "https://www.flaticon.com/svg/vstatic/svg/1786/1786971.svg?token=exp=1617804450~hmac=ffc3c263fae13afe7bf02256e0f2655a",
+        },
+        {
+          name : "기본 이미지4",
+          image_url : "https://www.flaticon.com/svg/vstatic/svg/1786/1786971.svg?token=exp=1617804450~hmac=ffc3c263fae13afe7bf02256e0f2655a",
+        },
+        {
+          name : "기본 이미지5",
+          image_url : "https://www.flaticon.com/svg/vstatic/svg/1786/1786971.svg?token=exp=1617804450~hmac=ffc3c263fae13afe7bf02256e0f2655a",
+        },
+      ],
+      slide: 0,
+      sliding: null
+    };
+  },
   props: {
     // msg: String
-  }
+  },
+  mounted(){
+    this.init()
+  },
+  methods: {
+    init(){
+      this.getBanner();
+      this.getLatestNews();
+      this.getLatestNotice();
+      this.getCooporate();
+    },
+    getBanner(){
+      this.axios
+      .get('http://localhost:8000/mainpage/banner/info')
+      .then(response => {
+          // console.log(response)
+          this.banner = response.data
+      });
+    },
+    getLatestNews(){
+      this.axios
+      .get('http://localhost:8000/mainpage/news/latest')
+      .then(response => {
+        this.latestNews = response.data
+      })
+    },
+    getLatestNotice(){
+      this.axios
+      .get('http://localhost:8000/mainpage/notice/latest')
+      .then(response => {
+        this.latestNotice = response.data
+      })
+    },
+    getCooporate(){
+      this.axios
+      .get('http://localhost:8000/mainpage/cooporate')
+      .then(response => {
+        console.log(response)
+        this.cooporate = response.data
+      })
+    },
+    onSlideStart() {
+      this.sliding = true
+    },
+    onSlideEnd() {
+      this.sliding = false
+    }
+  },
 }
 </script>
 
 <style scoped>
-#main-banner{
-  width: 100%;
-  height: 150%;
-}
+/* #main-banner{
+width: 100%;
+height: 400px;
+} */
 
 #news-img, #notice-img{
   width: 25%;

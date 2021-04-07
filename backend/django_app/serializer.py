@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import *
 
 #Create your views here.
-admin_names=['Company_Introduce','Company_History','Company_Certificate','FaQ','QnA_Answer','QnA_Question','Banner','News','Product','Product_summary','Product_detail']
+admin_names=['Company_Introduce','Company_History','Company_Certificate','FaQ','QnA_Answer','QnA_Question','Banner','News','Product','Product_summary','Product_detail', 'Cooporate', 'Notice']
 
 # Create your models here.
 for name in admin_names:
