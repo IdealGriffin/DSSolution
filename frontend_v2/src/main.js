@@ -30,6 +30,10 @@ import QnA from "./components/QnA.vue";
 import NotFound from "./components/NotFound.vue";
 import Login from "./components/Login.vue"
 
+// axios 가져오기
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
 const routes = [
   {
     path: "/",
@@ -112,6 +116,7 @@ const routes = [
   }
 ];
 Vue.use(VueRouter)
+Vue.use(VueAxios, axios)
 
 new Vue({
   router: new VueRouter({
