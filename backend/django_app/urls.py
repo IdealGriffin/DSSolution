@@ -1,5 +1,8 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import re_path, path, include
 from rest_framework.routers import DefaultRouter
+import os
 from . import views
 
 #Create your views here.
@@ -29,4 +32,4 @@ urlpatterns=[
     # News   
     # path('news/list/', views.NewsAdmin)
     
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 

@@ -11,10 +11,13 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
+MEDIA_URL = '/media/' # 기본 api url을 통일 시켜 번거로움을 줄이기 위해 /api/로 설정했음
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # 이미지 파일이 저장되는 기본 위치를 media폴더로 설정
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
