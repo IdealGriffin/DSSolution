@@ -58,7 +58,7 @@ class Notice(models.Model):
 
 class Cooporate(models.Model):
 	name = models.CharField(max_length=50)
-	image_url = models.CharField(max_length=50)
+	image_url = models.ImageField()
 
 
 class Product(models.Model):
