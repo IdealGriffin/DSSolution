@@ -159,7 +159,7 @@ export default {
     },
     getBanner(){
       this.axios
-      .get('http://localhost:8000/mainpage/banner/info')
+      .get('http://10.211.55.7:8000/mainpage/banner/info')
       .then(response => {
           // console.log(response)
           this.banner = response.data
@@ -167,21 +167,21 @@ export default {
     },
     getLatestNews(){
       this.axios
-      .get('http://localhost:8000/mainpage/news/latest')
+      .get('http://10.211.55.7:8000/mainpage/news/latest')
       .then(response => {
         this.latestNews = response.data
       })
     },
     getLatestNotice(){
       this.axios
-      .get('http://localhost:8000/mainpage/notice/latest')
+      .get('http://10.211.55.7:8000/mainpage/notice/latest')
       .then(response => {
         this.latestNotice = response.data
       })
     },
     getCooporate(){
       this.axios
-      .get('http://localhost:8000/mainpage/cooporate')
+      .get('http://10.211.55.7:8000/mainpage/cooporate')
       .then(response => {
         console.log(response)
         this.cooporate = response.data
