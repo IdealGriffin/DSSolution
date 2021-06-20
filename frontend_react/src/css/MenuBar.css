@@ -1,0 +1,38 @@
+.MainPage{
+    padding:15px;
+}
+#menu{
+    background-color: white;
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 30px;
+}
+#nav-text-collapse{
+    align-items: center;
+}
+.navbar-nav{
+    width: 100%;
+    justify-content: space-between;
+}
+#logo{
+    width: 300px;
+}
+#sub-menu{
+    display: flex;
+    justify-content: space-between;
+    background-color: #FAE8E8;
+    padding-left: 30%;
+    padding-right: 30%
+}
+#menu-router{
+    color: black;
+    text-decoration: none;
+    font-size: 24px;
+}
+#sub-item{
+    font-size: 20px;
+}
+
+.dropdown-toggle::after {
+    display:none;
+}

@@ -33,6 +33,9 @@ export default {
 }
 </script>
 <style scoped>
+.Bottom-banner{
+    bottom: 0px;
+}
 #logo{
     padding-top: 20px;
     width: 10%;

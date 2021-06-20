@@ -48,7 +48,7 @@
                     <b-nav-item href="#/notice">
                         <a id="menu-router">공지사항</a>
                     </b-nav-item>
-                    <b-nav-item :href="mallLink.url" :target="mallLink.target">
+                    <b-nav-item :href="mallLink[0].url">
                         <a id="menu-router">
                         쇼핑몰
                         </a>
@@ -61,17 +61,6 @@
                 </b-navbar-nav>
             </b-collapse>
         </b-navbar>
-        <!-- <div id="sub-menu" v-show="toShowProductList">
-            <router-link id="menu-router" to="/product1"> 상품1 </router-link>
-            <router-link id="menu-router" to="/product2"> 상품2 </router-link>
-            <router-link id="menu-router" to="/product3"> 상품3 </router-link>
-            <router-link id="menu-router" to="/product4"> 상품4 </router-link>
-        </div>
-        <div id="sub-menu" v-show="toShowSupportList">
-            <router-link id="menu-router" to="/faq"> 자주묻는질문 </router-link>
-            <router-link id="menu-router" to="/qna"> 1대1 문의 </router-link>
-            <router-link id="menu-router" to="/support"> 고객지원 </router-link>
-        </div> -->
     </div>
 </template>
 <script>
@@ -81,30 +70,27 @@ export default {
     },
     data() {
         return {
-            mallLink: {
-                 url: "https://www.naver.com",
-                 target: "_blank"
-            },
-            toShowProductList: false,
-            toShowSupportList: false,
+            mallLink: [{
+                 url: "https://www.daum.net",
+            },]
         };
     },
+
+    mounted(){
+        this.init()
+    },
     methods: {
-        initSubMenu(){
-            this.toShowProductList = false;
-            this.toShowSupportList = false;
+        init(){
+            this.getShopUrl()
         },
-        showProduct(){
-            this.toShowProductList = !this.toShowProductList
-            if(this.toShowSupportList){
-                this.toShowSupportList = false;
-            }
-        },
-        showSupport(){
-            this.toShowSupportList = !this.toShowSupportList
-            if(this.toShowProductList){
-                this.toShowProductList = false
-            }
+
+        getShopUrl(){
+            this.axios
+            .get('http://localhost:8000/shop')
+            .then(response => {
+                console.log(response)
+                this.mallLink = response.data
+            });
         },
     },
 }

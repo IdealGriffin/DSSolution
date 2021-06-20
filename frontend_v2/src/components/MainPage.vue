@@ -34,63 +34,134 @@
 
     </b-carousel>
 
-    <!-- 반복문으로 처리 -->
-    <div id="middle">
-      <div id="left-news">
-        <h2 class="title">{{"News"}}</h2>
-        <div id="middle-data">
-          <img id="news-img" :src="this.latestNews.image_url" alt="news-img">
-          <div id="news-data">
-            <h2 class="title">
-              {{this.latestNews.title}}
-            </h2>
-            <p id="news-contents">{{this.latestNews.contents}}</p>
-          </div>
-        </div>
-      </div>
-      <div id="right-notice">
-        <h2 class="title">{{"공지사항"}}</h2>
-        <div id="middle-data">
-          <img id="notice-img" src="https://www.flaticon.com/svg/vstatic/svg/3892/3892387.svg?token=exp=1617807030~hmac=7130147e145469bcca4319fb37920ab9" alt="notice-img">
-          <div id="notice-data">
-            <h2 class="title">
-              {{this.latestNotice.title}}
-            </h2>
-            <p id="notice-contents">{{this.latestNotice.contents}}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="main-business">
-      <router-link to="/product1">
-        <img class="products-img" src="../assets/products1.jpg" alt="product-img"/>
-      </router-link>
-      <router-link to="/product2">
-        <img class="products-img" src="../assets/products2.jpg" alt="product-img"/>
-      </router-link>
-      <router-link to="/product3">
-        <img class="products-img" src="../assets/products3.jpg" alt="product-img"/>
-      </router-link>
-      <router-link to="/product4">
-        <img class="products-img" src="../assets/products4.jpg" alt="product-img"/>
-      </router-link>
-    </div>
-    <div id="cooporate">
-      <h2>Cooporate</h2>
-      <div id="cooporate-list">
-        <img v-for="(i, id) in cooporate" :key="id" id="cooporate-img" :src="i.image_url" :alt="i.name">
-      </div>
 
+    <!-- 반복문으로 처리 -->
+    <b-card-group style="padding:30px">
+
+      <b-card
+        :title="this.latestNews.title"
+        :img-src="this.latestNews.image_url"
+        img-alt="Image"
+        img-top
+        tag="article"
+        style="min-width: 340px;"
+        class="mb-2"
+        id="left-news"
+      >
+        <b-card-text>
+          {{this.latestNews.contents}}
+        </b-card-text>
+
+        <b-button href="#/support/news" variant="primary">
+            더보기
+        </b-button>
+      </b-card>
+
+      <b-card
+        :title="this.latestNotice.title"
+        :img-src="this.latestNotice.image_url"
+        img-alt="Image"
+        img-top
+        tag="article"
+        style="min-width: 340px;"
+        class="mb-2"
+        id="right-notice"
+      >
+        <b-card-text>
+          {{this.latestNotice.contents}}
+        </b-card-text>
+
+        <b-button href="#/notice" variant="primary">더보기</b-button>
+      </b-card>
+    </b-card-group>
+    <swiper class="swiper" :options="swiper1">
+      <swiper-slide>
+        <router-link to="/product/1">
+          <img class="products-img" src="../assets/products1.jpg" alt="product-img"/>
+        </router-link>
+      </swiper-slide>
+      <swiper-slide>
+        <router-link to="/product/2">
+          <img class="products-img" src="../assets/products2.jpg" alt="product-img"/>
+        </router-link>
+      </swiper-slide>
+      <swiper-slide>
+        <router-link to="/product/3">
+          <img class="products-img" src="../assets/products3.jpg" alt="product-img"/>
+        </router-link>
+      </swiper-slide>
+      <swiper-slide>
+        <router-link to="/product/4">
+          <img class="products-img" src="../assets/products4.jpg" alt="product-img"/>
+        </router-link>
+      </swiper-slide>
+
+      <div class="swiper-button-prev" slot="button-prev"></div>
+      <div class="swiper-button-next" slot="button-next"></div>
+      <div class="swiper-pagination2" slot="pagination"></div> 
+    </swiper>
+
+    <div id="cooporate">
+      <h2>Cooporate</h2><br>
+
+      <swiper class="swiper" :options="swiper2">
+        <swiper-slide v-for="(i, id) in cooporate" :key="id">
+          <img id="cooporate-img" :src="i.image_url" :alt="i.name">
+        </swiper-slide>
+        <div class="swiper-pagination" slot="pagination"></div> 
+      </swiper>
     </div>
     
   </div>
 </template>
 
 <script>
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper' 
+import 'swiper/css/swiper.css'
+
 export default {
+  
   name: 'MainPage',
+  components:{
+    Swiper,
+    SwiperSlide
+  },
   data() {
     return {
+      host_name : "http://localhost:8000",
+      swiper1: {
+        loop: false, 
+        pagination: {
+          el: '.swiper-pagination1', 
+          clickable: false 
+        },
+        navigation: { 
+          nextEl: '.swiper-button-next', 
+          prevEl: '.swiper-button-prev' 
+        },
+        breakpoints: { 
+          // 화면의 넓이가 320px 이상일 때 
+          320: { slidesPerView: 1.5, spaceBetween: 20 }, 
+          // 화면의 넓이가 640px 이상일 때 
+          640: { slidesPerView: 2.5, spaceBetween: 30 } 
+        },
+      },
+
+      swiper2: {
+        loop: false, 
+        pagination: {
+          el: '.swiper-pagination', 
+          clickable: true 
+        }, 
+        breakpoints: { 
+          // 화면의 넓이가 320px 이상일 때 
+          320: { slidesPerView: 2.5, spaceBetween: 20 }, 
+          // 화면의 넓이가 640px 이상일 때 
+          640: { slidesPerView: 5, spaceBetween: 30 } 
+        },
+      },
+
+
       banner : [
         {
           name : "기본 배너",
@@ -113,10 +184,12 @@ export default {
         title : "최근 뉴스 제목 기본 값",
         contents : "최근 뉴스 컨텐츠 기본 값",
         image_url : "https://www.flaticon.com/svg/vstatic/svg/3892/3892387.svg?token=exp=1617807030~hmac=7130147e145469bcca4319fb37920ab9",
+        link_url : ""
       },
       latestNotice : {
         title : "최근 공지 제목 기본 값",
-        contents : "최근 공지 컨텐츠 기본 값"
+        contents : "최근 공지 컨텐츠 기본 값",
+        image_url :"https://www.flaticon.com/svg/vstatic/svg/3892/3892387.svg?token=exp=1617807030~hmac=7130147e145469bcca4319fb37920ab9",
       },
       cooporate : [
         {
@@ -159,7 +232,7 @@ export default {
     },
     getBanner(){
       this.axios
-      .get('http://10.211.55.7:8000/mainpage/banner/info')
+      .get(this.host_name+'/banner')
       .then(response => {
           // console.log(response)
           this.banner = response.data
@@ -167,21 +240,21 @@ export default {
     },
     getLatestNews(){
       this.axios
-      .get('http://10.211.55.7:8000/mainpage/news/latest')
+      .get(this.host_name+'/news/last')
       .then(response => {
-        this.latestNews = response.data
+        this.latestNews = response.data[0]
       })
     },
     getLatestNotice(){
       this.axios
-      .get('http://10.211.55.7:8000/mainpage/notice/latest')
+      .get(this.host_name+'/notice/last')
       .then(response => {
-        this.latestNotice = response.data
+        this.latestNotice = response.data[0]
       })
     },
     getCooporate(){
       this.axios
-      .get('http://10.211.55.7:8000/mainpage/cooporate')
+      .get(this.host_name+'/cooporate')
       .then(response => {
         console.log(response)
         this.cooporate = response.data
@@ -195,6 +268,8 @@ export default {
     }
   },
 }
+
+
 </script>
 
 <style scoped>
@@ -241,13 +316,11 @@ height: 400px;
 
 #main-business{
   display: flex;
-  justify-content: space-between;
 }
 
 .products-img{
-  height: 600px;
-  width: 400px;
-  padding: 20px;
+  width: 100%;
+  padding: 15px;
 }
 
 #cooporate{
@@ -266,7 +339,7 @@ height: 400px;
 #cooporate-img{
   padding-left: 1%;
   padding-right: 1%;
-  max-width: 10%;
+  width: 100%;
   height: auto;
 }
 ul {

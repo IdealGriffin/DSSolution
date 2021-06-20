@@ -1,83 +1,133 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from rest_framework import viewsets,generics, views
+from rest_framework.decorators import action
 from rest_framework.response import Response
 from .models import *
 from .serializer import *
+from .pagination import StandardResultsSetPagination
 
-from rest_framework import mixins
+#Company
+class Company_IntroduceAdmin(viewsets.ModelViewSet):
+    queryset=Company_Introduce.objects.order_by("-id")
+    serializer_class=Company_IntroduceSerializer
 
-#Create your views here.
-admin_names=['Company_Introduce','Company_History','Company_Certificate','FaQ','QnA_Answer','QnA_Question','Banner','News','Product','Product_summary','Product_detail', 'Cooporate', 'Notice']
-view_names=['Company_Introduce','Company_History','Company_Certificate']
+class Company_HistoryAdmin(viewsets.ModelViewSet):
+    queryset=Company_History.objects.all()
+    serializer_class=Company_HistorySerializer
 
-for name in view_names: #단순 참조용.
-    exec(
-    "class "+name+"View(generics.ListAPIView):\n"+
-    "   queryset="+name+".objects.all()\n"+
-    "   serializer_class="+name+"Serializer\n"
-    )
+class Company_CertificateAdmin(viewsets.ModelViewSet):
+    queryset=Company_Certificate.objects.all()
+    serializer_class=Company_CertificateSerializer
 
-for name in admin_names: #관리를 위해 삽입 수정 삭제 모든게 가능함
-    exec(
-    "class "+name+"Admin(viewsets.ModelViewSet):\n"+
-        "   queryset="+name+".objects.all()\n"+
-        "   serializer_class="+name+"Serializer"
-    )
+#FaQ
+class FaQAdmin(viewsets.ModelViewSet):
+    lookup_value_regex = '[0-9]+' 
+    queryset=FaQ.objects.order_by("-id")
+    serializer_class=FaQSerializer
+    pagination_class=StandardResultsSetPagination
+    def get_queryset(self):
+        search = self.request.query_params.get('search','')
+        if search:
+            self.queryset=self.queryset.filter(title__contains=search)
+        return self.queryset
+class FaQ_KindAdmin(generics.ListAPIView):
+    serializer_class=FaQSerializer
+    pagination_class=StandardResultsSetPagination
+    def get_queryset(self):
+        kind=""
+        try: kind = self.kwargs['kind']
+        except: print('Error: Have not kwargs')
+
+        if kind.upper()=="TOP10": queryset=FaQ.objects.filter(top10__gt=0).order_by("top10")
+        else: queryset=FaQ.objects.filter(kind__contains=kind).order_by("-id")
+
+        return queryset
 
 
-# class App2ViewSet(viewsets.ModelViewSet):
-#     queryset = App2.objects.all()
-#     serializer_class = App2Serializer
-
-# class AppViewList(generics.ListCreateAPIView):
-#     serializer_class = AppSerializer
-#     def get_queryset(self):
-#         queryset = App.objects.all()
-#         try:
-#             pk = self.kwargs['pk']
-#             queryset = queryset.filter(id=pk)
-#         except:
-#             pass
-#         return queryset
-
-class Banner_Main(generics.ListAPIView):
-    queryset = Banner.objects.all()
-    serializer_class = BannerSerializer
-
-# Latest_News는 generics.ListAPIView를 상속받는 것
-class Latest_News(generics.ListAPIView):
-    def get_object(self):
-        try:
-            return News.objects.last()
-        except:
-            raise Http404
-    def get(self, request, format=None):
-        snippet = self.get_object()
-        serializer = NewsSerializer(snippet)
+#QnA
+class QnA_AnswerAdmin(viewsets.ModelViewSet):
+    queryset=QnA_Answer.objects.all()
+    serializer_class=QnA_AnswerSerializer
+class QnA_QuestionAdmin(viewsets.ModelViewSet):
+    lookup_value_regex = '[0-9]+' 
+    queryset=QnA_Question.objects.all()
+    serializer_class=QnA_QuestionSerializer
+    def get_queryset(self):
+        search = self.request.query_params.get('search','')
+        if search:
+            self.queryset=self.queryset.filter(contents__contains=search)
+        return self.queryset
+    @action(['GET'],True)
+    def answer(self,request,pk=None):
+        queryset=QnA_Answer.objects.filter(question_number=pk)
+        serializer=QnA_AnswerSerializer(queryset,many=True)
         return Response(serializer.data)
 
-    
-class Latest_Notice(generics.ListAPIView):
-    def get_object(self):
-        try:
-            return Notice.objects.last()
-        except:
-            raise Http404
-    def get(self, request, format=None):
-        snippet = self.get_object()
-        serializer = NoticeSerializer(snippet)
+
+class BannerAdmin(viewsets.ModelViewSet):
+    queryset=Banner.objects.all()
+    serializer_class=BannerSerializer
+
+#News
+class NewsAdmin(viewsets.ModelViewSet):
+    lookup_value_regex = '[0-9]+' 
+    queryset=News.objects.order_by("-id")
+    serializer_class=NewsSerializer
+class NewsLastAdmin(generics.ListAPIView):
+    queryset=News.objects.order_by("-id")[:1]
+    serializer_class=NewsSerializer
+
+#Notice
+class NoticeAdmin(viewsets.ModelViewSet):
+    lookup_value_regex = '[0-9]+' 
+    queryset=Notice.objects.order_by("-id")
+    serializer_class=NoticeSerializer
+    pagination_class=StandardResultsSetPagination
+    @action(['GET'],False)
+    def important(self,request):
+        queryset=Notice.objects.order_by("-id").filter(important=True)
+        serializer=NoticeSerializer(queryset,many=True)
         return Response(serializer.data)
 
-class Product_Detail(views.APIView):
-    def get_object(self, pk):
-        try:
-            return Product_detail.objects.get(pk=pk)
-        except:
-            raise Http404
-    def get(self, request, pk, format=None):
-        snippet = self.get_object(pk)
-        serializer = Product_detailSerializer(snippet)
+class NoticeLastAdmin(generics.ListAPIView):
+    queryset=Notice.objects.order_by("-id")[:1]
+    serializer_class=NoticeSerializer
+
+#Cooporate
+class CooporateAdmin(viewsets.ModelViewSet):
+    queryset=Cooporate.objects.all()
+    serializer_class=CooporateSerializer
+
+
+class ShopAdmin(viewsets.ModelViewSet):
+    queryset=Notice.objects.order_by("-id")
+    queryset=Shop.objects.all()
+    serializer_class=ShopSerializer
+
+class LocationAdmin(viewsets.ModelViewSet):
+    queryset=Location.objects.all()
+    serializer_class=LocationSerializer
+
+class GroupAdmin(viewsets.ModelViewSet):
+    lookup_value_regex = '[0-9]+' 
+    queryset=Group.objects.all()
+    serializer_class=GroupSerializer
+    @action(['GET'],True)
+    def product(self,request,pk=None):
+        queryset=Product.objects.filter(pid=pk)
+        serializer=ProductSerializer(queryset,many=True)
         return Response(serializer.data)
 
+class ProductAdmin(viewsets.ModelViewSet):
+    lookup_value_regex = '[0-9]+'
+    queryset=Product.objects.all()
+    serializer_class=ProductSerializer
+    @action(['GET'],True)
+    def descript(self,request,pk=None):
+        queryset=Product_description.objects.filter(psid=pk)
+        serializer=Product_descriptionSerializer(queryset,many=True)
+        return Response(serializer.data)
     
-    
+class Product_descriptionAdmin(viewsets.ModelViewSet):
+    queryset=Product_description.objects.all()
+    serializer_class=Product_descriptionSerializer

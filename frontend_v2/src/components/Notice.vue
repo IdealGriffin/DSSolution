@@ -3,9 +3,17 @@
         <div class="headline">
             <h2 class="headline-title">공지사항</h2>
         </div>
+
         <div>
             <div class="board-list">
-                <div v-for="(item, id) in boardList" :key="id">
+                <div class="important" v-for="(item, id) in importantList.results" :key="id">
+                    <router-link id=board-router :to="`/notice/${item.id}`">
+                        <span class="board-id">{{item.id}}</span>
+                        <span class="board-title">{{item.title}}</span>
+                        <span class="board-date">{{item.date}}</span>
+                    </router-link>
+                </div>
+                <div v-for="(item, id) in boardList.results" :key="id">
                     <router-link id=board-router :to="`/notice/${item.id}`">
                         <span class="board-id">{{item.id}}</span>
                         <span class="board-title">{{item.title}}</span>
@@ -13,9 +21,13 @@
                     </router-link>
                 </div>
             </div>
-            <nav class="pagination">
+            <b-pagination
+                :total-rows="boardList.count"
+                :per-page="15"
+                align="center"
+                @page-click="reTable"
+            />
 
-            </nav>
         </div>
     </div>
 </template>
@@ -28,45 +40,115 @@ export default {
     data(){
         // 추후에는 axios이용해서 클릭했을 경우 각각의 데이터를 불러오도록 만들 예정
         return {
-            boardList:[
-                {
-                    id: 1,
-                    title: "타이틀1",
-                    contents: "컨텐츠!@!@",
-                    date: "2021.03.07",
-                },
-                {
-                    id: 2,
-                    title: "타이틀2",
-                    contents: "컨텐츠!@!@",
-                    date: "2021.03.08",
-                },
-                {
-                    id: 3,
-                    title: "타이틀3",
-                    contents: "컨텐츠!@!@",
-                    date: "2021.03.09",
-                },
-                {
-                    id: 4,
-                    title: "타이틀4",
-                    contents: "컨텐츠!@!@",
-                    date: "2021.03.10",
-                },
-            ]
+            currentPage:1,
+            boardList:{
+                count : 4,
+                next : null,
+                previous : null,
+                results:[
+                    {
+                        id: 1,
+                        title: "타이틀1",
+                        contents: "컨텐츠!@!@",
+                        date: "2021.03.07",
+                    },
+                    {
+                        id: 2,
+                        title: "타이틀2",
+                        contents: "컨텐츠!@!@",
+                        date: "2021.03.08",
+                    },
+                    {
+                        id: 3,
+                        title: "타이틀3",
+                        contents: "컨텐츠!@!@",
+                        date: "2021.03.09",
+                    },
+                    {
+                        id: 4,
+                        title: "타이틀4",
+                        contents: "컨텐츠!@!@",
+                        date: "2021.03.10",
+                    },
+                ]
+            },
+            importantList:{
+                count : 4,
+                next : null,
+                previous : null,
+                results:[
+                    {
+                        id: 1,
+                        title: "타이틀1",
+                        contents: "컨텐츠!@!@",
+                        date: "2021.03.07",
+                    },
+                    {
+                        id: 2,
+                        title: "타이틀2",
+                        contents: "컨텐츠!@!@",
+                        date: "2021.03.08",
+                    },
+                    {
+                        id: 3,
+                        title: "타이틀3",
+                        contents: "컨텐츠!@!@",
+                        date: "2021.03.09",
+                    },
+                    {
+                        id: 4,
+                        title: "타이틀4",
+                        contents: "컨텐츠!@!@",
+                        date: "2021.03.10",
+                    },
+                ]
+            },
         }
-    }
+    },
+    mounted(){
+        this.init()
+    },
+    methods: {
+        init(){
+            this.getNotice()
+            this.getImportant()
+        },
+        reTable : function(b,p){
+            this.currentPage=p;
+            this.getNotice();
+        },
+        getNotice(){
+            this.axios
+            .get('http://localhost:8000/notice/?page='+this.currentPage)
+            .then(response => {
+                console.log(response)
+                this.boardList = response.data
+            });
+        },
+        getImportant(){
+            this.axios
+            .get('http://localhost:8000/notice/important/')
+            .then(response => {
+                console.log(response)
+                this.importantList = response.data
+            });
+
+        }
+
+    },
 }
 </script>
 <style scoped>
-.headline-title{
+.headline-title {
     font-weight: 700;
     max-width: 1080px;
     margin: 0 auto;
     text-align: center;
     padding-bottom: 20px;
 }
-
+.important{
+    background-color: gray;
+}
 .board-list{
     display: table;
     width: 1080px;
