@@ -48,10 +48,12 @@ class FaQ_KindAdmin(generics.ListAPIView):
 class QnA_AnswerAdmin(viewsets.ModelViewSet):
     queryset=QnA_Answer.objects.all()
     serializer_class=QnA_AnswerSerializer
+    pagination_class=StandardResultsSetPagination
 class QnA_QuestionAdmin(viewsets.ModelViewSet):
     lookup_value_regex = '[0-9]+' 
     queryset=QnA_Question.objects.all()
     serializer_class=QnA_QuestionSerializer
+    pagination_class=StandardResultsSetPagination
     def get_queryset(self):
         search = self.request.query_params.get('search','')
         if search:

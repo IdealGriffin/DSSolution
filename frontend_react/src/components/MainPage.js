@@ -2,12 +2,13 @@ import {Component} from "react";
 import axios from 'axios';
 
 import { Swiper, SwiperSlide } from 'swiper/react' 
-import SwiperCore, { Navigation, Pagination } from "swiper";
 import 'swiper/swiper.scss';
 import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.scss";
 
 import '../css/MainPage.css'
+
+import Photos from "./Photos";
 
 
 
@@ -17,23 +18,23 @@ class MainPage extends Component{
             {
               id : 1,
               name : "기본 배너",
-              location : "https://picsum.photos/1024/480/?image=52",
+              image : "https://picsum.photos/1024/480/?image=52",
             },
             {
               id : 2,
               name : "기본 배너2",
-              location : "https://picsum.photos/1024/480/?image=52",
+              image : "https://picsum.photos/1024/480/?image=52",
             },
             {
 
               id : 3,
               name : "기본 배너3",
-              location : "https://picsum.photos/1024/480/?image=52",
+              image : "https://picsum.photos/1024/480/?image=52",
             },
             {
               id : 4,
               name : "기본 배너4",
-              location : "https://picsum.photos/1024/480/?image=52",
+              image : "https://picsum.photos/1024/480/?image=52",
             },
         ],
         latestNews : {
@@ -76,15 +77,15 @@ class MainPage extends Component{
             },
           ],
     }
-    loadtable=() => axios.get('http://localhost:8080/api/posts') //백엔드 주소 GET 하겠다.
-                    .then(response => this.setState({
-                        posts:response.data.data
-                    }))
-                    .catch(e => {
-                    console.error(e);
-                    })
+    getbanner=()=> axios.get('http://localhost:8000/banner/')
+                        .then(response => this.setState({
+                            banner:response.data
+                        }))
+                        .catch(e => {
+                            console.error(e);
+                        })
     componentDidMount() { //컴포트가 실행될때 1번 처음에 실행되는 함수.
-        this.loadtable();
+        this.getbanner();
     }
 
     render(){
@@ -93,27 +94,47 @@ class MainPage extends Component{
                 
                 {/* 캐러셀 적용 */}
                 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    {this.state.banner.map((b, index) =>{
-                        return(<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to={index} class={index===0?"active":""} aria-label="Slide"></button>)
-                    })}
-                </div>
-                
-                <div class="carousel-inner">
-                    {this.state.banner.map((b, index) => {
-                        return (<div class={"carousel-item"+(index===0?" active":"")}>
-                                    <img src={b.location} class="d-block w-100" alt="carousel"/>
-                                </div>);
-                    })}
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+                    <div class="carousel-indicators">
+                        {this.state.banner.map((b, index) =>{
+                            return(<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to={index} class={index===0?"active":""} aria-label="Slide"></button>)
+                        })}
+                    </div>
+                    
+                    <div class="carousel-inner">
+                        {this.state.banner.map((b, index) => {
+                            return (<div class={"carousel-item"+(index===0?" active":"")}>
+                                        <img src={b.image} class="d-block w-100" alt="carousel"/>
+                                    </div>);
+                        })}
+                    </div>
+                    
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                    
+                    <button type="button" class="btn btn-primary edit_button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Edit
+                    </button>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="btn-primary" data-bs-dismiss="modal" aria-label="Close">확인</button>
+                            </div>
+                            <div class="modal-body">
+                                <Photos
+                                    kind="banner/"
+                                ></Photos>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
                 {/* 뉴스 및 공지 카드 적용 */}
@@ -135,36 +156,39 @@ class MainPage extends Component{
                         </div>
                     </div>
                 </div>
-                
+                <div id="group">
                 {/* 제품들 */}
-                <Swiper
-                    class="swiper-container"
-                    loop={false}
-                    pagination={{
-                        clickable: false
-                    }}
-                    navigation= {{ 
-                        nextEl: '.swiper-button-next', 
-                        prevEl: '.swiper-button-prev' 
-                    }}
-                    breakpoints={{ 
-                        // 화면의 넓이가 320px 이상일 때 
-                        320: { slidesPerView: 1.5, spaceBetween: 20 }, 
-                        // 화면의 넓이가 640px 이상일 때 
-                        640: { slidesPerView: 2.5, spaceBetween: 30 } 
-                    }}
-                >
-                { this.state.groups.map((g,index)=>{
-                    return(
-                    <SwiperSlide> <a href="#/product/1"><img id="cooporate-img" src={g.image_url} alt={g.name}/> </a> </SwiperSlide>
-                    );
-                })}
-                </Swiper>
-
+                    <Swiper
+                        class="swiper-container"
+                        loop={false}
+                        pagination={{
+                            clickable: false
+                        }}
+                        navigation= {{ 
+                            nextEl: '.swiper-button-next', 
+                            prevEl: '.swiper-button-prev' 
+                        }}
+                        breakpoints={{ 
+                            // 화면의 넓이가 320px 이상일 때 
+                            320: { slidesPerView: 1.5, spaceBetween: 20 }, 
+                            // 화면의 넓이가 640px 이상일 때 
+                            640: { slidesPerView: 2.5, spaceBetween: 30 } 
+                        }}
+                    >
+                    { this.state.groups.map((g,index)=>{
+                        return(
+                        <SwiperSlide> <a href="#/product/1"><img id="cooporate-img" src={g.image_url} alt={g.name}/> </a> </SwiperSlide>
+                        );
+                    })}
+                    </Swiper>
+                    <button class="edit_button">edit</button>
+                </div>
                 {/* 협력사 */}
                 <div id="cooporate">
-                <h2>Cooporate</h2>
-
+                    <div id="cooporate_title">
+                        <h2>Cooporate</h2>
+                        <button class="edit_button">edit</button>
+                    </div>
                     <Swiper
                         class="swiper-container"
                         loop={true}

@@ -40,7 +40,7 @@ class QnA_Answer(models.Model):
 	question_number = models.ForeignKey("QnA_Question", on_delete=models.CASCADE)
 
 class Banner(models.Model):
-	location = models.CharField(max_length=50)
+	image = models.ImageField()
 	name = models.CharField(max_length=50)
 
 class News(models.Model):

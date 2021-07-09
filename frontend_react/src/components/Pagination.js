@@ -1,6 +1,6 @@
 const Pagination = ({pnt, currentPage, total, perPage, setPage}) => {
 
-    function setPage(pnt,page){
+    function setPage(page){
         pnt.state.currentPage=page
         pnt.getNotice();
     }
@@ -16,19 +16,19 @@ const Pagination = ({pnt, currentPage, total, perPage, setPage}) => {
             <ul class="pagination justify-content-center">
                 {currentPage>1 &&
                     <li class="page-item">
-                        <a class="page-link" onClick={() => setPage(pnt,currentPage-1)} aria-label="Previous">
+                        <a class="page-link" onClick={() => setPage(currentPage-1)} aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
                 }
                 {pageNumbers.map((number)=>{
                     return(
-                        <li class={"page-item"+(number===currentPage&&" active")}><a class="page-link" onClick={() => setPage(pnt,number)}>{number}</a></li>
+                        <li class={"page-item"+(number===currentPage&&" active")}><a class="page-link" onClick={() => setPage(number)}>{number}</a></li>
                     )
                 })}
                 {currentPage<maxPage &&
                     <li class="page-item">
-                        <a class="page-link" onClick={() => setPage(pnt,currentPage+1)} aria-label="Next">
+                        <a class="page-link" onClick={() => setPage(currentPage+1)} aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>

@@ -1,4 +1,5 @@
 import {Component} from "react";
+import { Link } from "react-router-dom";
 import axios from 'axios';
 import Pagination from './Pagination'
 import "../css/QnA.css"
@@ -48,7 +49,7 @@ class QnA extends Component{
 
 
     componentDidMount() { //컴포트가 실행될때 처음에 실행되는 함수.
-        //this.getQnA();
+        this.getQnA();
     }
 
     render(){
@@ -61,12 +62,12 @@ class QnA extends Component{
                 {/* 테이블 출력부분 */}
                 <div class="board-list">
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end Padding">
-                        <button type="button" class="btn btn-secondary">1대1 문의올리기</button>
+                        <Link to="/question"><button type="button" class="btn btn-secondary" >1대1 문의올리기</button></Link>
                     </div>
                     {this.state.boardList.results.map((item)=>{
                         return(
                             <div>
-                            <a id="board-router" href={"/QnA/"+item.id}>
+                            <a id="board-router" href={"/question/"+item.id}>
                                 <span class="board-id">{item.id}</span>
                                 <span class="board-title">{item.title}</span>
                                 <span class="board-date">{item.date}</span>

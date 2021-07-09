@@ -48,6 +48,9 @@
   padding-bottom: 5%;
   height: 20%;
 }
+#cooporate_title{
+  position:relative;
+}
 #cooporate-list{
   display: flex;
   justify-content: space-between;
@@ -64,4 +67,13 @@
 }
 .MainPage{
   background-color: whitesmoke;
+}
+
+.edit_button{
+  position:absolute;
+  background: none;
+  top:0;
+  z-index: 2;
+  right: 0;
+  margin: 5px;
 }
