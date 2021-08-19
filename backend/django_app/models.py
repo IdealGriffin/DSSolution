@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Company_Introduce(models.Model): 
-	image_url = models.ImageField()
+	image = models.ImageField()
 	introduce = models.TextField()
 	shoppingmall = models.CharField(max_length=50)
 
@@ -14,11 +14,11 @@ class Company_History(models.Model):
 class Company_Main_Business(models.Model):
 	name = models.CharField(max_length=50)
 	contents = models.TextField()
-	image_url = models.ImageField()
+	image = models.ImageField()
 
 class Company_Certificate(models.Model):
 	name = models.CharField(max_length=50)
-	image_url = models.ImageField()
+	image = models.ImageField()
 
 class FaQ(models.Model):
 	title = models.CharField(max_length=50)
@@ -46,7 +46,7 @@ class Banner(models.Model):
 class News(models.Model):
 	title = models.CharField(max_length=50)
 	contents = models.TextField()
-	image_url = models.ImageField()
+	image = models.ImageField()
 	link_url = models.URLField()
 	date = models.DateTimeField(auto_now=False, auto_now_add=False)
 
@@ -58,7 +58,7 @@ class Notice(models.Model):
 
 class Cooporate(models.Model):
 	name = models.CharField(max_length=50)
-	image_url = models.ImageField()
+	image = models.ImageField()
 
 class Shop(models.Model):
 	url = models.URLField()
@@ -71,8 +71,10 @@ class Location(models.Model):
 
 class Group(models.Model):
 	name = models.CharField(max_length=50)
-	introduce = models.TextField()
 	image_url = models.ImageField()
+
+class Group_introduce(models.Model):
+	introduce = models.TextField()
 
 class Product(models.Model):
 	pid = models.ForeignKey("Group",related_name="product", on_delete=models.CASCADE)

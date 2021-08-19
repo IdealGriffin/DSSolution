@@ -4,3 +4,14 @@
 .padding-15{
     padding:15px;
 }
+.edit_button{
+    position:absolute;
+    background: none;
+    top:0;
+    z-index: 2;
+    right: 0;
+    margin: 5px;
+}
+.headline-title{
+    position:relative;
+}

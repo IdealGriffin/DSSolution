@@ -1,6 +1,7 @@
 import {useState,useEffect} from "react";
 import axios from 'axios';
 import Moment from 'moment';
+import "../css/Photos.css"
 
 const Photos = ({kind}) =>{
     const [photoList, setPhotoList] = useState(
@@ -33,7 +34,7 @@ const Photos = ({kind}) =>{
 
         axios({
             method: "post",
-            url: "http://localhost:8000/banner/",
+            url: "http://localhost:8000/"+kind,
             data: formData,
             headers:{
                 "Content-Type":"multipart/form-data",
@@ -42,7 +43,7 @@ const Photos = ({kind}) =>{
             console.log(response)
         })
         getPhotoList();
-
+        window.location.href = "";
     }
     useEffect(getPhotoList,[])
     return(
@@ -60,10 +61,10 @@ const Photos = ({kind}) =>{
 
                 <div class="col">
                     <div class="card">
-                        <form onSubmit={uploadModule}>
-                            name<input type="text" name="name"/>
+                        <form onSubmit={uploadModule} class="match_width">
+                            <input type="text" name="name" class="match_width"/>
                             <br/>
-                            <input type="file" name="image" accept=".gif, .jpg, .png"/>
+                            <input type="file" name="image" accept=".gif, .jpg, .png" class="match_width"/>
                             <input type="submit" value="제출"/>
                         </form>
                     </div>

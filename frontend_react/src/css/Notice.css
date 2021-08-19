@@ -1,6 +1,16 @@
+.edit_button{
+    position:absolute;
+    background: none;
+    top:0;
+    z-index: 2;
+    right: 0;
+    margin: 5px;
+  }
 .headline-title {
     font-weight: 700;
     max-width: 1080px;
+    
+    position:relative;
     margin: 0 auto;
     text-align: center;
     padding-bottom: 20px;
@@ -54,4 +64,11 @@
 
 .board-date{
     width: 125px;
+}
+
+
+.form-check{
+    padding: 15px;
+    font-size: 15px;
+    text-align: left;
 }

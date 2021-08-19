@@ -57,23 +57,23 @@ class MainPage extends Component{
         cooporate : [
             {
               name : "기본 이미지",
-              image_url : "https://www.flaticon.com/svg/vstatic/svg/1786/1786971.svg?token=exp=1617804450~hmac=ffc3c263fae13afe7bf02256e0f2655a",
+              image : "https://www.flaticon.com/svg/vstatic/svg/1786/1786971.svg?token=exp=1617804450~hmac=ffc3c263fae13afe7bf02256e0f2655a",
             },
             {
               name : "기본 이미지2",
-              image_url : "https://www.flaticon.com/svg/vstatic/svg/1786/1786971.svg?token=exp=1617804450~hmac=ffc3c263fae13afe7bf02256e0f2655a",
+              image : "https://www.flaticon.com/svg/vstatic/svg/1786/1786971.svg?token=exp=1617804450~hmac=ffc3c263fae13afe7bf02256e0f2655a",
             },
             {
               name : "기본 이미지3",
-              image_url : "https://www.flaticon.com/svg/vstatic/svg/1786/1786971.svg?token=exp=1617804450~hmac=ffc3c263fae13afe7bf02256e0f2655a",
+              image : "https://www.flaticon.com/svg/vstatic/svg/1786/1786971.svg?token=exp=1617804450~hmac=ffc3c263fae13afe7bf02256e0f2655a",
             },
             {
               name : "기본 이미지4",
-              image_url : "https://www.flaticon.com/svg/vstatic/svg/1786/1786971.svg?token=exp=1617804450~hmac=ffc3c263fae13afe7bf02256e0f2655a",
+              image : "https://www.flaticon.com/svg/vstatic/svg/1786/1786971.svg?token=exp=1617804450~hmac=ffc3c263fae13afe7bf02256e0f2655a",
             },
             {
               name : "기본 이미지5",
-              image_url : "https://www.flaticon.com/svg/vstatic/svg/1786/1786971.svg?token=exp=1617804450~hmac=ffc3c263fae13afe7bf02256e0f2655a",
+              image : "https://www.flaticon.com/svg/vstatic/svg/1786/1786971.svg?token=exp=1617804450~hmac=ffc3c263fae13afe7bf02256e0f2655a",
             },
           ],
     }
@@ -84,8 +84,16 @@ class MainPage extends Component{
                         .catch(e => {
                             console.error(e);
                         })
+    getCooporate=()=> axios.get('http://localhost:8000/cooporate/')
+                        .then(response => this.setState({
+                            cooporate:response.data
+                        }))
+                        .catch(e => {
+                            console.error(e);
+                        })
     componentDidMount() { //컴포트가 실행될때 1번 처음에 실행되는 함수.
         this.getbanner();
+        this.getCooporate();
     }
 
     render(){
@@ -117,23 +125,23 @@ class MainPage extends Component{
                         <span class="visually-hidden">Next</span>
                     </button>
                     
-                    <button type="button" class="btn btn-primary edit_button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button type="button" class="btn btn-primary edit_button" data-bs-toggle="modal" data-bs-target="#banners">
                         Edit
                     </button>
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                <button type="button" class="btn-primary" data-bs-dismiss="modal" aria-label="Close">확인</button>
+                    <div class="modal fade" id="banners" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                    <button type="button" class="btn-primary" data-bs-dismiss="modal" aria-label="Close">확인</button>
+                                </div>
+                                <div class="modal-body">
+                                    <Photos
+                                        kind="banner/"
+                                    ></Photos>
+                                </div>
+                                </div>
                             </div>
-                            <div class="modal-body">
-                                <Photos
-                                    kind="banner/"
-                                ></Photos>
-                            </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 
@@ -181,17 +189,51 @@ class MainPage extends Component{
                         );
                     })}
                     </Swiper>
-                    <button class="edit_button">edit</button>
+                    <button type="button" class="btn btn-primary edit_button" data-bs-toggle="modal" data-bs-target="#groups">
+                        Edit
+                    </button>
+                    <div class="modal fade" id="groups" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                    <button type="button" class="btn-primary" onClick={this.getbanner} data-bs-dismiss="modal" aria-label="Close">확인</button>
+                                </div>
+                                <div class="modal-body">
+                                    <Photos
+                                        kind="group/"
+                                    ></Photos>
+                                </div>
+                                </div>
+                        </div>
+                    </div>
                 </div>
                 {/* 협력사 */}
                 <div id="cooporate">
                     <div id="cooporate_title">
                         <h2>Cooporate</h2>
-                        <button class="edit_button">edit</button>
+                        <button type="button" class="btn btn-primary edit_button" data-bs-toggle="modal" data-bs-target="#cooporates">
+                            Edit
+                        </button>
+                        <div class="modal fade" id="cooporates" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                <button type="button" class="btn-primary" data-bs-dismiss="modal" aria-label="Close">확인</button>
+                            </div>
+                            <div class="modal-body">
+                                <Photos
+                                    kind="cooporate/"
+                                ></Photos>
+                            </div>
+                            </div>
+                            </div>
+                        </div>
                     </div>
                     <Swiper
                         class="swiper-container"
-                        loop={true}
+                        loop={false}
                         pagination={{
                             clickable: false
                         }}
@@ -204,11 +246,12 @@ class MainPage extends Component{
                     >
                     { this.state.cooporate.map((c,index)=>{
                      return(
-                        <SwiperSlide> <img id="cooporate-img" src={c.image_url} alt={c.name}/> </SwiperSlide>
+                        <SwiperSlide> <img id="cooporate-img" src={c.image} alt={c.name}/> </SwiperSlide>
                      );
                     })}
                     </Swiper>
                 </div>
+
             </div>
         );
     }

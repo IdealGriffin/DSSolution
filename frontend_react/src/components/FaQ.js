@@ -72,7 +72,11 @@ class FaQ extends Component{
         return(
             <div class="FaQ">
                 <div class="headline">
-                    <h2 class="headline-title">자주 묻는 질문</h2>
+                    <h2 class="headline-title">자주 묻는 질문
+                        <button type="button" class="btn btn-primary edit_button" data-bs-toggle="modal" data-bs-target="#notice">
+                            Edit
+                        </button>     
+                    </h2>
                 </div>
                 <div>
                     <nav class="nav nav-pills flex-column flex-sm-row justify-content-center">
