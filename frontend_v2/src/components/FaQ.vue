@@ -9,21 +9,20 @@
             검색을 해도 원하는 질문이 없다면 아래 링크를 통해 1대1 문의가 가능합니다.<br>
             1 대 1 문의하러 가기 <a href="./QnA"> -> </a>
         </div>
-        <b-tabs id="choose-list" v-model="table_kind" justified>
-            <b-tab title="TOP10" active></b-tab>
-            <b-tab title="전체"></b-tab>
-            <b-tab title="고객지원"></b-tab>
-            <b-tab title="고장"></b-tab>
-            <b-tab title="교환 및 환불"></b-tab>
-            <b-tab title="기타"></b-tab>
+        <b-tabs id="choose-list" justified>
+            <b-tab title="TOP10" active @click="reKind('/TOP10')"></b-tab>
+            <b-tab title="전체" @click="reKind('')"></b-tab>
+            <b-tab title="고객지원" @click="reKind('/고객지원')"></b-tab>
+            <b-tab title="고장" @click="reKind('/고장')"></b-tab>
+            <b-tab title="교환 및 환불" @click="reKind('/교환 및 환불')"></b-tab>
+            <b-tab title="기타" @click="reKind('/기타')"></b-tab>
+            <b-tab title="검색" @click="reKind('')">
+                <input v-on:input="getSearch" class="search-text" placeholder="Search">
+            </b-tab>
         </b-tabs>
-        <form id="search">
-            <input type="button"  class="search-text" value=" 검색 ">
-            <input type="text" class="search-text">
-        </form>
         <div id="table" role="tablist">
-            <div v-for="(item, id) in boardList" :key="id" >
-                <b-card v-if="item.check_kind & kindlist[table_kind]">
+            <div v-for="(item, id) in boardList.results" :key="id" >
+                <b-card>
                     <b-card-header header-tag="header" class="p-1" role="tab">
                         <b-button block v-b-toggle="'accordion-'+item.id" variant="info">
                             <div class="table-list">
@@ -39,14 +38,12 @@
                     </b-collapse>
                 </b-card>
             </div>
-        </div>
-        <div style="display:flex">
+
             <b-pagination
-                v-model="currentPage"
-                :total-rows="rows"
-                :per-page="perPage"
-                aria-controls="my-table"
-                style="margin: 0 auto;"
+                :total-rows="boardList.count"
+                :perPage=15
+                @page-click="reTable"
+                align="center"
             ></b-pagination>
         </div>
     </div>
@@ -57,10 +54,8 @@ export default {
     data(){
         // 추후에는 axios이용해서 클릭했을 경우 각각의 데이터를 불러오도록 만들 예정
         return {
-            table_kind: 0,
-            kindlist:[
-                1,2,4,8,16,32,
-            ],
+            table_kind: "/TOP10",
+            currentPage: 1,
             boardList:[
                 {
                     id: 1,
@@ -90,17 +85,52 @@ export default {
                     title: "타이틀4",
                     contents: "컨텐츠!@!@",
                 },
-            ]
+            ],
         }
+    },
+    mounted(){
+        this.init();
+    },
+    methods: {
+        init(){
+            this.getNotice();
+        },
+        reKind : function(kind){
+            this.currentPage=1;
+            this.table_kind=kind;
+            this.getNotice();
+        },
+        reTable : function(b,p){
+            this.currentPage=p;
+            this.getNotice();
+        },
+        getSearch: function(event){
+            this.axios
+            .get('http://localhost:8000/faq/?search='+event.target.value+'&&page='+this.currentPage)
+            .then(response => {
+                console.log(response)
+                this.boardList = response.data
+            });
+        },
+        getNotice(){
+            this.axios
+            .get('http://localhost:8000/faq'+this.table_kind+'/?page='+this.currentPage)
+            .then(response => {
+                console.log(response)
+                this.boardList = response.data
+            });
+        },
+
     },
 }
 </script>
 <style scoped>
     .FaQ{
-        /*background-color: #A26D6D;*/
-        align-items:center;
-        width: 100%;
-        height: 1000px;
+        font-weight: 700;
+        max-width: 1080px;
+        margin: 0 auto;
+        text-align: center;
+        padding-bottom: 20px;
     }
     #title{
         display: table;
@@ -154,11 +184,8 @@ export default {
         width:50px;
         float:right;
         font-size:20px;
-    }#search{
-        width:1040px;
-        height:50px;
-        margin:0 auto;
     }.search-text{
         float:right;
+        margin: 10px;
     }
 </style>

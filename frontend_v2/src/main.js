@@ -46,22 +46,22 @@ const routes = [
     component: Company,
   },
   {
-    path: "/product1",
+    path: "/product/1",
     name: "Product",
     component: Product,
   },
   {
-    path: "/product2",
+    path: "/product/2",
     name: "Product2",
     component: Product2,
   },
   {
-    path: "/product3",
+    path: "/product/3",
     name: "Product3",
     component: Product3,
   },
   {
-    path: "/product4",
+    path: "/product/4",
     name: "Product4",
     component: Product4,
   },

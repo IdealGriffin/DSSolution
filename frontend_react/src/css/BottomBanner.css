@@ -1,0 +1,12 @@
+.Bottom-banner{
+    display: flex;
+    padding: 15px;
+}
+#bottom-logo{
+    height: 70px;
+    width: 300px;
+}
+.company-info{
+    padding: 15px;
+    font-size: 10px;
+}

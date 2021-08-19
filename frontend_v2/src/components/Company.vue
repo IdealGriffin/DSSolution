@@ -1,17 +1,21 @@
 <template lang="">
     <div class="Company">
-        <div id="introduce">
-            <img id="rogo" src="../assets/대충만든로고.png" alt="main-banner">
-
-            <div id="detail" style="background-color:white">
-                <h1> DS Solution </h1><br>
-                DS solution은 2014년 설립되었으며 여러 기업에 지원을 하면서 안정적인 사업을 제공하고 있습니다. <br>
-                회사소개 디테일. <br>
-                <br>
-            </div>
-            <br>
+        <div>
+            <b-card no-body class="overflow-hidden" style="max-width: 1040px;margin:0 auto;">
+                <b-row no-gutters>
+                <b-col md="6">
+                    <b-card-img :src="Rogo[0].image_url" alt="Image" class="rounded-0"></b-card-img>
+                </b-col>
+                <b-col md="6">
+                    <b-card-body title="DSSolution">
+                    <b-card-text>
+                        {{Rogo[0].introduce}}
+                    </b-card-text>
+                    </b-card-body>
+                </b-col>
+                </b-row>
+            </b-card>
         </div>
-        <div style="width:100%; height:4px; background-color:black;"/><br>
         <table class="history">
             <th id="photo">
                 <img id="history_photo" src="../assets/연혁.png">
@@ -61,6 +65,32 @@
 <script>
 export default {
     name: 'Company',
+    data(){
+        return{
+            Rogo:[{
+                image_url:"http://localhost:8000/media/image21.png",
+                introduce:"안녕하세요"
+            }]
+        }
+    },
+
+    mounted(){
+        this.init()
+    },
+    methods: {
+        init(){
+            this.getRogo()
+        },
+        getRogo(){
+            this.axios
+            .get('http://localhost:8000/company/introduce')
+            .then(response => {
+                console.log(response)
+                this.Rogo = response.data
+            });
+        },
+
+    },
 }
 </script>
 
@@ -85,9 +115,8 @@ export default {
     display: table;
     width:1040px;
     text-align: center;
-    background-image: url(../assets/로봇팔.png);
     background-size:100%;
-    margin: 0 auto;
+    margin: 20px auto;
     padding: 20px;
 }
 #photo{
